@@ -91,6 +91,7 @@ echo [2/3] Building executable...
     --windowed ^
     --name "ElysiumChecker" ^
     --icon "logo.ico" ^
+    --add-data "logo.ico;." ^
     --add-data "config.json;." ^
     --add-data "pages;pages" ^
     --add-data "utils;utils" ^
