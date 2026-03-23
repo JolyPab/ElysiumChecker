@@ -8,18 +8,14 @@ from PyQt5.QtCore import Qt
 import styles
 from utils.paths import tool_path
 
-# (name, exe, verb)  verb="runas" requires admin, "open" does not
-SECONDARY_TOOLS = [
-    ("WinPrefetchView",      "WinPrefetchView.exe",                          "runas"),
-    ("ExecutedProgramsList", "ExecutedProgramsList.exe",                      "runas"),
-    ("RecentFilesView",      "RecentFilesView.exe",                           "runas"),
-    ("RegistryExplorer",     "RegistryExplorer\\RegistryExplorer.exe",        "open"),
-    ("JumpListExplorer",     "JumpListExplorer\\JumpListExplorer.exe",        "open"),
-    ("SimpleUnlocker",       "SimpleUnlocker\\SU.exe",                        "runas"),
+# (name, exe, verb)
+ADDITIONAL_TOOLS = [
+    ("RegScanner",           "RegScanner.exe",           "runas"),
+    ("BrowserDownloadsView", "BrowserDownloadsView.exe", "open"),
 ]
 
 
-class SecondaryCheckPage(QWidget):
+class AdditionalCheckPage(QWidget):
     def __init__(self):
         super().__init__()
         self._build_ui()
@@ -30,9 +26,9 @@ class SecondaryCheckPage(QWidget):
         layout.setSpacing(14)
 
         header = QHBoxLayout()
-        icon = QLabel("💬")
+        icon = QLabel("🔎")
         icon.setStyleSheet(f"color: {styles.ACCENT_LIGHT}; font-size: 24px; padding-right: 6px;")
-        title = QLabel("Вторичная проверка")
+        title = QLabel("Дополнительная проверка")
         title.setStyleSheet(f"color: {styles.TEXT_PRIMARY}; font-size: 26px; font-weight: 700;")
         header.addWidget(icon)
         header.addWidget(title)
@@ -53,7 +49,7 @@ class SecondaryCheckPage(QWidget):
 
         grid = QGridLayout()
         grid.setSpacing(10)
-        for idx, (name, exe, verb) in enumerate(SECONDARY_TOOLS):
+        for idx, (name, exe, verb) in enumerate(ADDITIONAL_TOOLS):
             row, col = divmod(idx, 3)
             btn = QPushButton(f"{idx + 1}.  {name}")
             btn.setFixedHeight(52)

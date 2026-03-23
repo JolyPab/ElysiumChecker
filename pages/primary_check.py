@@ -1,21 +1,20 @@
 import os
-import subprocess
+import ctypes
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
-    QGridLayout, QFrame, QMessageBox
+    QGridLayout, QMessageBox
 )
 from PyQt5.QtCore import Qt
 import styles
 from utils.paths import tool_path
 
-# (display_name, executable_filename, download_hint)
 PRIMARY_TOOLS = [
-    ("ShellBags Analyzer",    "ShellBagsView.exe",        "NirSoft ShellBagsView"),
-    ("LastActivityView",      "LastActivityView.exe",     "NirSoft LastActivityView"),
-    ("UsbDeview",             "USBDeview.exe",            "NirSoft USBDeview"),
-    ("BrowserDownloadView",   "BrowserDownloadsView.exe", "NirSoft BrowserDownloadsView"),
-    ("SystemInformer",        "SystemInformer.exe",       "SystemInformer (Process Hacker 3)"),
-    ("Everything",            "Everything.exe",           "voidtools Everything"),
+    ("ShellBag",             "shellbag_analyzer_cleaner.exe"),
+    ("Everything",           "Everything.exe"),
+    ("LastActivityView",     "LastActivityView.exe"),
+    ("BrowsingHistoryView",  "BrowsingHistoryView.exe"),
+    ("USBDriveLog",          "USBDriveLog.exe"),
+    ("SystemInformer",       "amd64\\SystemInformer.exe"),
 ]
 
 
@@ -29,7 +28,6 @@ class PrimaryCheckPage(QWidget):
         layout.setContentsMargins(24, 24, 24, 16)
         layout.setSpacing(14)
 
-        # Header
         header = QHBoxLayout()
         icon = QLabel("🔍")
         icon.setStyleSheet(f"color: {styles.ACCENT_LIGHT}; font-size: 24px; padding-right: 6px;")
@@ -40,7 +38,6 @@ class PrimaryCheckPage(QWidget):
         header.addStretch()
         layout.addLayout(header)
 
-        # Card
         card = QWidget()
         card.setObjectName("card")
         card.setStyleSheet(styles.CARD_STYLE)
@@ -53,36 +50,29 @@ class PrimaryCheckPage(QWidget):
         hint.setStyleSheet(f"color: {styles.TEXT_SECONDARY}; font-size: 13px;")
         card_layout.addWidget(hint)
 
-        # Tools grid
         grid = QGridLayout()
         grid.setSpacing(10)
-
-        for idx, (name, exe, _hint) in enumerate(PRIMARY_TOOLS):
+        for idx, (name, exe) in enumerate(PRIMARY_TOOLS):
             row, col = divmod(idx, 3)
             btn = QPushButton(f"{idx + 1}.  {name}")
             btn.setFixedHeight(52)
             btn.setStyleSheet(styles.TOOL_BUTTON_STYLE)
             btn.setCursor(Qt.PointingHandCursor)
-            btn.clicked.connect(lambda checked, e=exe, n=name, h=_hint: self._launch(e, n, h))
+            btn.clicked.connect(lambda checked, e=exe, n=name: self._launch(e, n))
             grid.addWidget(btn, row, col)
 
         card_layout.addLayout(grid)
-
         layout.addWidget(card)
         layout.addStretch()
 
-    def _launch(self, exe: str, name: str, hint: str):
+    def _launch(self, exe: str, name: str):
         path = tool_path(exe)
         if not os.path.isfile(path):
-            QMessageBox.warning(
-                self,
-                "Утилита не найдена",
-                f"Утилита '{name}' не найдена внутри чекера.\n\n"
-                f"Убедитесь, что при сборке файл '{exe}'\n"
-                f"находился в папке tools\\",
-            )
+            QMessageBox.warning(self, "Утилита не найдена",
+                f"Файл не найден:\n{path}\n\nПоместите .exe в папку tools\\")
             return
         try:
-            subprocess.Popen([path], cwd=os.path.dirname(path))
+            ctypes.windll.shell32.ShellExecuteW(
+                None, "runas", path, None, os.path.dirname(path), 1)
         except Exception as e:
             QMessageBox.critical(self, "Ошибка запуска", str(e))

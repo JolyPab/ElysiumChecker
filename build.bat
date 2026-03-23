@@ -79,16 +79,23 @@ if %TOOL_COUNT%==0 (
     echo.
 )
 
+:: Collect logo flags
+set LOGO_FLAGS=
+if exist "logo.gif" set LOGO_FLAGS=%LOGO_FLAGS% --add-data "logo.gif;."
+if exist "logo.png" set LOGO_FLAGS=%LOGO_FLAGS% --add-data "logo.png;."
+
 :: Build
 echo [2/3] Building executable...
 %PYTHON% -m PyInstaller ^
     --onefile ^
     --windowed ^
     --name "ElysiumChecker" ^
+    --icon "logo.ico" ^
     --add-data "config.json;." ^
     --add-data "pages;pages" ^
     --add-data "utils;utils" ^
     --add-data "tools;tools" ^
+    %LOGO_FLAGS% ^
     --hidden-import "win32gui" ^
     --hidden-import "win32con" ^
     --hidden-import "win32api" ^

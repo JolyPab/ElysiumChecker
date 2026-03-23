@@ -127,12 +127,13 @@ class MainWindow(QMainWindow):
         vbox.addSpacing(8)
 
         nav_items = [
-            ("info",      "  Информация"),
-            ("steam",     "  Проверка стим"),
-            ("files",     "  Проверка файлов"),
-            ("game",      "  Проверка игры"),
-            ("primary",   "  Первичная проверка"),
-            ("secondary", "  Вторичная проверка"),
+            ("info",       "  Информация"),
+            ("steam",      "  Проверка стим"),
+            ("files",      "  Проверка файлов"),
+            ("game",       "  Проверка игры"),
+            ("primary",    "  Первичная проверка"),
+            ("secondary",  "  Вторичная проверка"),
+            ("additional", "  Дополнительная проверка"),
         ]
 
         for key, label in nav_items:
@@ -178,14 +179,16 @@ class MainWindow(QMainWindow):
         from pages.game_page import GamePage
         from pages.primary_check import PrimaryCheckPage
         from pages.secondary_check import SecondaryCheckPage
+        from pages.additional_check import AdditionalCheckPage
 
         self._pages = {
-            "info":      InfoPage(),
-            "steam":     SteamPage(),
-            "files":     FilesPage(),
-            "game":      GamePage(),
-            "primary":   PrimaryCheckPage(),
-            "secondary": SecondaryCheckPage(),
+            "info":       InfoPage(),
+            "steam":      SteamPage(),
+            "files":      FilesPage(),
+            "game":       GamePage(),
+            "primary":    PrimaryCheckPage(),
+            "secondary":  SecondaryCheckPage(),
+            "additional": AdditionalCheckPage(),
         }
         for page in self._pages.values():
             self.stack.addWidget(page)
