@@ -1,0 +1,26 @@
+# Build output
+dist/
+build/
+*.spec
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Tools folder — не заливать чужие exe
+tools/
+
+# Temp files
+*.tmp
+*.log
+
+# Config с личными данными
+config.json
+
+# IDE
+.vscode/
+.idea/
+
+# PyInstaller temp
+*.manifest
