@@ -133,7 +133,7 @@ class MainWindow(QMainWindow):
             ("game",       "  Проверка игры"),
             ("primary",    "  Первичная проверка"),
             ("secondary",  "  Вторичная проверка"),
-            ("additional", "  Дополнительная проверка"),
+            ("additional", "  Дополнительно"),
         ]
 
         for key, label in nav_items:

@@ -5,14 +5,22 @@ from datetime import datetime
 # Signatures — known cheat-related names
 SIGNATURES = [
     # Specific CS2/CSGO cheat clients
-    "skeet", "sk33t", "fatality", "neverlose", "gamesense",
-    "aimware", "onetap", "uranium", "osiris", "interwebz",
-    "nixware", "lucid", "es3", "hvh", "hvhcheat",
-    "streamproof", "legitcheat", "ragehack", "ragebot",
+    "skeet", "sk33t", "skeet.cc", "fatality", "fatality.win", "neverlose", "neverlose.cc",
+    "gamesense", "aimware", "onetap", "nixware", "midnight", "primordial",
+    "memesense", "anyx", "projectinfinity", "legendware", "uranium", "osiris",
+    "interwebz", "lucid", "es3", "xone", "midnight", "xoneware", "hvh", "hvhcheat", "streamproof",
+    "legitcheat", "ragehack", "ragebot", "compkiller", "astral", "astral.rip",
+    "venom", "britva", "pena", "axion", "plague", "plaguecheat", "enigma",
+    "en1gma", "vredux", "vrx", "asphyxia", "mezware", "magichka",
+    "geraengine", "gripix", "grapeRage", "extrimhack", "multihack",
+    "zrk", "zrk menu", "weave", "dragonhack", "wraith", "chieftain", "mason",
+    "nova macro", "predator", "predator.systems", "luno", "sharkhack", "sharkhack.fun",
     "legitbot", "aimbot", "wallhack", "triggerbot", "spinbot",
     "antiaimbot", "antiaim", "bunnyhop", "bhop", "speedhack",
     "noclip", "autofire", "autoshoot", "esp_", "_esp",
     "no-recoil", "norecoil", "recoil_script",
+    "skinchanger", "skin_changer", "skinswapper", "inventorychanger",
+    "exloader", "exclient",
     # Generic cheat / crack / injection
     "crack", "cracked", "crackme",
     "injector", "inject", "dll_inject", "dllinjector",
@@ -30,17 +38,43 @@ SIGNATURES = [
     "gameguard_bypass", "be_bypass", "easy_anti",
     # HvH / scene specific
     "hotvshot", "hvh_config", "rage_config",
-    "legitaa", "legitangles",
+    "legitaa", "legit",
     "backtrack", "back_track",
     "doubletap", "dt_config",
     "autowall", "auto_wall",
     "resolverbypass",
-    # Common cheat config / log folders
-    "cheatconfig", "cheat_config",
-    "cheat_settings", "cheat_menu",
-    "cheat_log", "cheat_logs",
-    "aimconfig", "aim_config",
-    "hvhconfig", "hvh_config",
+   # Common cheat config / log folders
+"cheatconfig", "cheat_config",
+"cheat_settings", "cheat_menu",
+"cheat_log", "cheat_logs",
+"aimconfig", "aim_config",
+"hvhconfig", "hvh_config",
+
+# Lua / scripts (у большинства читов есть lua api)
+"lua_scripts", "cheat_lua", "autoexec_cheat",
+"skeet_lua", "nl_lua", "fatality_lua",
+
+# Inject / loader folders
+"inject", "injector", "loader",
+"cheat_loader", "cheatloader",
+"dll_inject", "dllinjector",
+
+# Bypass / anticheat
+"vac_bypass", "eac_bypass", "anticheat_bypass",
+"trustfactor", "trust_bypass",
+
+# Config dumps / exports типичные для читов
+"rage_cfg", "legit_cfg", "hvh_cfg",
+"semirageconfig", "semirage_cfg",
+"nospread_cfg", "spread_cfg",
+
+# DMA (железные читы, популярно в СНГ)
+"dma_cheat", "dma_esp", "dma_hack",
+
+# Misc папки которые создают читы
+"cheat_data", "cheat_cache",
+"skinsettings", "skin_settings",
+"skinconfig", "skin_cfg",
 ]
 
 # Convert to lowercase set for fast lookup
